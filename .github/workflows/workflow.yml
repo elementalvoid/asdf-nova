@@ -1,6 +1,10 @@
 name: Main workflow
 
 on:
+  workflow_dispatch:
+    paths-ignore:
+      - "**.md"
+      - ".all-contributorsrc"
   push:
     paths-ignore:
       - "**.md"
