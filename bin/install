@@ -38,7 +38,9 @@ install() {
   echo "Downloading nova from ${download_url}"
   curl -L "$download_url" -o "${tmp_dir}/nova_${platform}_${version}.tar.gz"
   tar -xzf ${tmp_dir}/nova_${platform}_${version}.tar.gz
-  mv ${tmp_dir}/nova ${bin_path}
+  # The tar.gz has the binary with a capital "Nova" so we try to handle both
+  # options in case it changes or the filesystem is case sensitive
+  { mv ${tmp_dir}/nova ${bin_path} || mv ${tmp_dir}/Nova ${bin_path}; }
   chmod +x "${bin_path}"
   echo; echo "Nova ${version} installed."
 }
