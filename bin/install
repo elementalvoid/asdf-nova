@@ -32,7 +32,7 @@ install() {
   local bin_path="${install_path}/nova"
 
   local download_url
-  download_url="https://github.com/FairwindsOps/Nova/releases/download/${version}/Nova_${version}_${platform}_${arch}.tar.gz"
+  download_url="https://github.com/FairwindsOps/Nova/releases/download/v${version}/nova_${version}_${platform}_${arch}.tar.gz"
 
   mkdir -p "${install_path}"
 
