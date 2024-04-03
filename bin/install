@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+source "$(dirname "$0")/../lib/utils.sh"
+
 [[ -z ${ASDF_INSTALL_TYPE} ]] && echo "ASDF_INSTALL_TYPE is required" && exit 1
 [[ -z ${ASDF_INSTALL_VERSION} ]] && echo "ASDF_INSTALL_VERSION is required" && exit 1
 [[ -z ${ASDF_INSTALL_PATH} ]] && echo "ASDF_INSTALL_PATH is required" && exit 1
@@ -32,7 +34,12 @@ install() {
   local bin_path="${install_path}/nova"
 
   local download_url
-  download_url="https://github.com/FairwindsOps/Nova/releases/download/${version}/Nova_${version}_${platform}_${arch}.tar.gz"
+
+  if verlte "3.6.4" ${version}; then
+    download_url="https://github.com/FairwindsOps/Nova/releases/download/${version}/nova_${version}_${platform}_${arch}.tar.gz"
+  else
+    download_url="https://github.com/FairwindsOps/Nova/releases/download/v${version}/nova_${version}_${platform}_${arch}.tar.gz"
+  fi
 
   mkdir -p "${install_path}"
 
